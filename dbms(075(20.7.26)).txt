@@ -1,0 +1,126 @@
+SQL> create table stu(
+  2  reg_no varchar(7),
+  3  name char(10),
+  4  course char(7),
+  5  dob date,
+  6  year number(2)
+  7  );
+
+Table created.
+
+SQL> desc stu;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(7)
+ NAME                                               CHAR(10)
+ COURSE                                             CHAR(7)
+ DOB                                                DATE
+ YEAR                                               NUMBER(2)
+
+SQL> create table stu2  as select* from stu;
+
+Table created.
+
+SQL> desc stu2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(7)
+ NAME                                               CHAR(10)
+ COURSE                                             CHAR(7)
+ DOB                                                DATE
+ YEAR                                               NUMBER(2)
+
+SQL> create table stu3 as select reg_no,name,year from stu;
+
+Table created.
+
+SQL> desc stu3;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(7)
+ NAME                                               CHAR(10)
+ YEAR                                               NUMBER(2)
+
+SQL> insert into stu values('A075','likki','cse','21-mar-07',03);
+
+1 row created.
+
+SQL> select*from stu;
+
+REG_NO  NAME       COURSE  DOB             YEAR
+------- ---------- ------- --------- ----------
+A075    likki      cse     21-MAR-07          3
+
+SQL> insert into stu (name,year) values('ram',04);
+
+1 row created.
+
+SQL> select*from stu;
+
+REG_NO  NAME       COURSE  DOB             YEAR
+------- ---------- ------- --------- ----------
+A075    likki      cse     21-MAR-07          3
+        ram                                   4
+
+SQL> create table stu4 as select* from stu where 7>9;
+
+Table created.
+
+SQL> select*from stu4;
+
+no rows selected
+
+SQL> desc stu4;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(7)
+ NAME                                               CHAR(10)
+ COURSE                                             CHAR(7)
+ DOB                                                DATE
+ YEAR                                               NUMBER(2)
+
+SQL> alter table stu modify course char(10);
+
+Table altered.
+
+SQL> desc stu;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG_NO                                             VARCHAR2(7)
+ NAME                                               CHAR(10)
+ COURSE                                             CHAR(10)
+ DOB                                                DATE
+ YEAR                                               NUMBER(2)
+
+SQL> insert into stu values('&reg_no','&name','&course','&dob',&year);
+Enter value for reg_no: 001
+Enter value for name: abhi
+Enter value for course: ece
+Enter value for dob: 01-jan-01
+Enter value for year: 4
+old   1: insert into stu values('&reg_no','&name','&course','&dob',&year)
+new   1: insert into stu values('001','abhi','ece','01-jan-01',4)
+
+1 row created.
+
+SQL> /
+Enter value for reg_no: 002
+Enter value for name: ashu
+Enter value for course: cse
+Enter value for dob: 07-jul-07
+Enter value for year: 3
+old   1: insert into stu values('&reg_no','&name','&course','&dob',&year)
+new   1: insert into stu values('002','ashu','cse','07-jul-07',3)
+
+1 row created.
+
+SQL> select*from stu
+  2
+SQL> select*from stu;
+
+REG_NO  NAME       COURSE     DOB             YEAR
+------- ---------- ---------- --------- ----------
+A075    likki      cse        21-MAR-07          3
+        ram                                      4
+001     abhi       ece        01-JAN-01          4
+002     ashu       cse        07-JUL-07          3
